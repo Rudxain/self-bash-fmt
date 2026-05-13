@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eufo pipefail
+IFS='
+'
+
+#shellcheck disable=1090
+source <(printf %s "bashfmt() { ${ cat "$1"; }; }")
+
+# TO-DO: remove extra \n
+declare -f bashfmt | sed 's/^ \{4\}//' | tail -n+3 | head -n-1
